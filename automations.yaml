@@ -1,0 +1,10 @@
+- id: '1556720493354'
+  alias: Test 1
+  trigger:
+  - at: '16:30'
+    platform: time
+  condition: []
+  action:
+  - data:
+      message: test
+    service: notify.ios_lujo_iphone

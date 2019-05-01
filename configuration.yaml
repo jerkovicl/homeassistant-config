@@ -1,0 +1,94 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude_home
+  longitude: !secret longitude_home
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 0
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # C for Celcius, F for Fahrenheit
+  temperature_unit: C
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Zagreb
+  # Customization file
+  customize: !include customize.yaml
+# enable_debug:
+zone:
+  name: Home
+  latitude: !secret latitude_home
+  longitude: !secret longitude_home
+  radius: 200
+  icon: mdi:home
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+http:
+  base_url: !secret http_base_url
+  ssl_certificate: !secret http_ssl_certificate
+  ssl_key: !secret http_ssl_key
+  login_attempts_threshold: 4
+
+
+# Discover some devices automatically
+discovery:
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+ios:
+person:
+# Sensors
+sensor:
+  # Weather prediction
+  - platform: time_date
+    display_options:
+      - 'date'
+      - 'time'
+  - platform: yr
+    name: Weather 
+    monitored_conditions:
+      - temperature
+      - symbol
+# Enables configuration UI
+config:
+# Log Severities: notset, debug, info, warn, warning, error, fatal, critical
+logger:
+  default: error
+  logs:
+    homeassistant.components.media_player: critical
+    homeassistant.core: critical
+    homeassistant.helpers.entity: critical
+    homeassistant.components.http.ban: warning
+
+# Text to speech
+tts:
+  - platform: google_translate
+notify:
+  - platform: ios
+google_assistant:
+  project_id: hass-vm
+  api_key: !secret google_api_key
+  exposed_domains:
+    - switch
+    - light
+    - media_player
+    - input_boolean
+    - group
+  entity_config:
+    # switch.kitchen:
+    #   name: CUSTOM_NAME_FOR_GOOGLE_ASSISTANT
+    #   aliases:
+    #     - BRIGHT_LIGHTS
+    #     - ENTRY_LIGHTS
+    media_player.living_room:
+      expose: true
+      room: Living room
+    # script.tv_youtube_on:
+    #   expose: true
+    #   name: Youtube
+    #   room: Living room
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
