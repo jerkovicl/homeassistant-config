@@ -1,0 +1,10 @@
+ # docs https://www.home-assistant.io/components/broadlink/#switch
+ - platform: broadlink
+   type: rm_mini
+   host: !secret broadlink_address
+   mac: !secret broadlink_mac
+   switches:
+    panasonic_tv:
+      friendly_name: "TV"
+      command_on: 'sjcyAAcSBxMHEgcSBxIUBgcTBxIIEhMGBxITBggSFAYHEhQGBxIHExQGFAYIEwcSFAYTBge8AAAAAAAA'
+      command_off: 'stgyAAcTBxMHEwcSBxMTBgcTBxMHExMHBxMUBgcTEwcHExMHBxMHExMHEwcTBxMHBxMHEwe9AAAAAAAA'

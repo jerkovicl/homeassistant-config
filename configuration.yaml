@@ -1,4 +1,13 @@
 homeassistant:
+  auth_providers:
+    - type: homeassistant
+    - type: trusted_networks
+      trusted_networks:
+        - 127.0.0.1
+        - ::1
+        - 192.168.5.0/24
+    #- type: legacy_api_password
+    #  api_password: !secret http_password
   # Name of the location where Home Assistant is running
   name: Home
   # Location required to calculate the time the sun rises and sets
@@ -12,8 +21,13 @@ homeassistant:
   temperature_unit: C
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/Zagreb
-  # Customization file
+# Customization file
   customize: !include customize.yaml
+# Weather DarkSky setup
+#   weather:
+#   - platform: darksky
+#      api_key: !secret darksky_api_key
+#      mode: daily
 # enable_debug:
 zone:
   name: Home
@@ -21,6 +35,7 @@ zone:
   longitude: !secret longitude_home
   radius: 200
   icon: mdi:home
+
 
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
@@ -39,6 +54,12 @@ discovery:
 conversation:
 ios:
 person:
+#   - name: Luka
+#     id: djlujo
+#     user_id: !secret user_id
+#     device_trackers:
+#       - device_tracker.lujo_iphone
+      
 # Sensors
 sensor:
   # Weather prediction
@@ -51,8 +72,12 @@ sensor:
     monitored_conditions:
       - temperature
       - symbol
+smartir:
+climate: !include smartir.yaml
 # Enables configuration UI
 config:
+# View all events in a logbook
+logbook:
 # Log Severities: notset, debug, info, warn, warning, error, fatal, critical
 logger:
   default: error
@@ -64,31 +89,13 @@ logger:
 
 # Text to speech
 tts:
-  - platform: google
+  - platform: google_translate
 notify:
   - platform: ios
-google_assistant:
-  project_id: hass-vm
-  api_key: !secret google_api_key
-  exposed_domains:
-    - switch
-    - light
-    - media_player
-    - input_boolean
-    - group
-  entity_config:
-    # switch.kitchen:
-    #   name: CUSTOM_NAME_FOR_GOOGLE_ASSISTANT
-    #   aliases:
-    #     - BRIGHT_LIGHTS
-    #     - ENTRY_LIGHTS
-    media_player.living_room:
-      expose: true
-      room: Living room
-    # script.tv_youtube_on:
-    #   expose: true
-    #   name: Youtube
-    #   room: Living room
+google_assistant: !include google_assistant.yaml
 group: !include groups.yaml
 automation: !include automations.yaml
+device_tracker: !include device_tracker.yaml
 script: !include scripts.yaml
+switch: !include_dir_merge_list switch
+input_select: !include input_select.yaml

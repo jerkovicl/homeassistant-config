@@ -1,10 +1,45 @@
-- id: '1556720493354'
-  alias: Test 1
+# - id: '1556720493354'
+#   alias: Test 1
+#   trigger:
+#     platform: state
+#     to: 'on'
+#   condition: []
+#   action:
+#   - data:
+#       message: test
+#     service: notify.ios_lujo_iphone
+- id: hassio_new_release
+  alias: Hassio New Release
   trigger:
-  - at: '16:30'
-    platform: time
-  condition: []
+    - platform: state
+      entity_id: updater.updater
   action:
-  - data:
-      message: test
-    service: notify.ios_lujo_iphone
+  - service: notify.ios_lujo_iphone
+    data_template: 
+      title: 'New Home Assistant Release'
+      message: "Home Assistant  {{ states.updater.updater.state }}  is now available."
+- id: set_volume
+  alias: Set Jukebox Volume
+  trigger:
+    - platform: state
+      entity_id: media_player.living_room_speaker
+      to: 'playing'
+  condition:
+    - condition: template
+      value_template: '{{ states("media_player.flow") == "on"}}'
+  action:
+  - service: media_player.volume_set
+    data:
+      entity_id: media_player.flow
+      volume_level: 0.50
+- id: set_tv_source    
+  alias: Select TV Source
+  trigger:
+    - platform: state
+      entity_id: input_select.tv_source
+      to: "HDMI 1"
+  action:
+  - service: broadlink.send
+    data:
+      host: !secret broadlink_address
+      packet: "JgAoAgABJpQTEhM2ExITEhM2FBETNhM3FDYTERQ2FDUUERQ2FD"

@@ -1,0 +1,24 @@
+project_id: hass-vm
+api_key: !secret google_api_key
+expose_by_default: false
+#   exposed_domains:
+#     - switch
+#     - light
+#     - media_player
+#     - input_boolean
+#     - group
+#     - script
+entity_config:
+    # switch.kitchen:
+    #   name: CUSTOM_NAME_FOR_GOOGLE_ASSISTANT
+    #   aliases:
+    #     - BRIGHT_LIGHTS
+    #     - ENTRY_LIGHTS
+    # media_player.jukebox:
+    #   name: Jukebox
+    #   expose: true
+    #   room: Living room
+     script.jukebox_volume_up:
+       expose: true
+       name: Jukebox Volume
+       room: Living room
