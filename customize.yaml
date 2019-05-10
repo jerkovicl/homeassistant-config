@@ -1,0 +1,4 @@
+ switch.panasonic_tv:
+      friendly_name: Panasonic TV
+      #assumed_state: false # change to input_boolean look
+      icon: mdi:television

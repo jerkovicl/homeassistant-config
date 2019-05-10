@@ -72,8 +72,9 @@ sensor:
     monitored_conditions:
       - temperature
       - symbol
+## Climate control custom component
 smartir:
-climate: !include smartir.yaml
+climate: !include climate.yaml
 # Enables configuration UI
 config:
 # View all events in a logbook
@@ -90,12 +91,20 @@ logger:
 # Text to speech
 tts:
   - platform: google_translate
+    service_name: google_say
+# Notifications
 notify:
   - platform: ios
+# Exposed entities for Google Home control
 google_assistant: !include google_assistant.yaml
+# UI grouping
 group: !include groups.yaml
+# Automations
 automation: !include automations.yaml
+# Home/Away Presence control
 device_tracker: !include device_tracker.yaml
+# Scripts
 script: !include scripts.yaml
+# UI Components
 switch: !include_dir_merge_list switch
 input_select: !include input_select.yaml

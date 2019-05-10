@@ -9,15 +9,13 @@ expose_by_default: false
 #     - group
 #     - script
 entity_config:
-    # switch.kitchen:
-    #   name: CUSTOM_NAME_FOR_GOOGLE_ASSISTANT
-    #   aliases:
-    #     - BRIGHT_LIGHTS
-    #     - ENTRY_LIGHTS
-    # media_player.jukebox:
-    #   name: Jukebox
-    #   expose: true
-    #   room: Living room
+     switch.panasonic_tv:
+       expose: true
+       name: TV
+       room: Living room
+       aliases:
+        - PANASONIC_TV
+        - LIVING_ROOM_TV
      script.jukebox_volume_up:
        expose: true
        name: Jukebox Volume
