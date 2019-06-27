@@ -33,7 +33,7 @@
       entity_id: media_player.flow
       volume_level: 0.50
 - id: set_tv_source    
-  alias: Select TV Source
+  alias: Select TV Source Mi Box
   trigger:
     - platform: state
       entity_id: input_select.tv_source
@@ -42,4 +42,46 @@
   - service: broadlink.send
     data:
       host: !secret broadlink_address
-      packet: "JgAoAgABJpQTEhM2ExITEhM2FBETNhM3FDYTERQ2FDUUERQ2FD"
+      packet: "JgDMAG44Dw4PKQ8ODwkUDBANDw0PDg8NEAwPDg8NEA0PKQ8ODw0QDBMLDQ4QDQ8NEAwPDg8pEA0PDQ8MEA8NDhANDw0QDQ8pEA0UJA8ODw0QDQ4ODg4PKhAMECkQDg0ODw0QDQ8pEAAJeHI4EA0PKg4MEQ0QDQ4OEAwQDQ8NDw8ODRAMDw4PKg8NDw0QDQ8NEAwPDg4OEA0ODhMmDw0QDQ4ODw0QDQ8NEA0ODw0rDw0PKg8NEA0PDQ8NDw0QKRANDykQDQ8NEA0PDQ8qDwANBQAAAAAAAAAAAAAAAA=="
+- id: set_tv_source    
+  alias: Select TV Source Cast
+  trigger:
+    - platform: state
+      entity_id: input_select.tv_source
+      to: "HDMI 4"
+  action:
+  - service: broadlink.send
+    data:
+      host: !secret broadlink_address
+      packet: "JgBiAA0PECkPDg4ODw0PCxINDg4PDSwNDg8PDQ4rDw0QDBANDwoSDg4OEAwPDhQHECoQDA8ODw0QDBANDw0QDQ8NDyoPDQ4rEAwQDQ8NDw0NEA4qDw4PKg8NEA0NDw8ODioQAA0FAAAAAAAA"
+- id: failed_login_attempt 
+  alias: "Send notification upon failed login attempt"
+  initial_state: true
+  trigger:
+     - platform: state
+       entity_id: persistent_notification.http_login
+  condition:
+     - condition: template
+       value_template: "{{ trigger.to_state.state != 'None' }}"
+  action:
+     - service: notify.home_assistant
+       data_template:
+         title: "{{ states.persistent_notification.http_login.attributes.message }}"
+         message: 'url: https://whatismyipaddress.com/ip/{{ states.persistent_notification.http_login.attributes.message.split ("from ") [1]}}'
+     - service: persistent_notification.dismiss
+       data:
+         notification_id: 'http_login'
+- id: send_rss_ui_notification
+  alias: Send notification of RSS feed title when updated
+  trigger:
+    - platform: event
+      event_type: feedreader
+  action:
+    - service: persistent_notification.create
+      data_template:
+        title: "New RSS update"
+        message: "New RSS update - {{ as_timestamp(now()) | timestamp_custom('%I:%M:%S %p %d%b%Y', true) }}"
+        notification_id: "{{ trigger.event.data.title }}"
+      
+      
+      

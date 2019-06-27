@@ -1,0 +1,38 @@
+#########################################################
+#                                                       #
+#                 LEAVING HOME                          #
+#                                                       #
+#########################################################
+
+- id: leaving_home
+  alias: Leaving Home
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: device_tracker.lujo_iphone
+    - platform: state
+      entity_id: device_tracker.sime_iphone
+  condition:
+    condition: and
+    conditions:
+      - condition: template
+        value_template: "{{ states('device_tracker.lujo_iphone') != 'home' }}"
+      - condition: template
+        value_template: "{{ states('device_tracker.sime_iphone') != 'home' }}"
+  action:
+    - service: switch.turn_off
+      entity_id:
+        #- switch.kuled1
+        #- switch.kuled2
+        #- switch.basic1
+    - service: light.turn_off
+      entity_id:
+        #- light.tradfri_bulb_e26_ws_opal_980lm_3
+        #- light.tradfri_bulb_e26_ws_opal_980lm_2_2
+        #- light.yeelightrgb2
+
+########################################################
+#                                                      #
+#             END OF CONFIGURATION FILE                #
+#                                                      #
+########################################################

@@ -2,3 +2,41 @@
       friendly_name: Panasonic TV
       #assumed_state: false # change to input_boolean look
       icon: mdi:television
+ sensor.average_active_pace:
+      hidden: true
+ sensor.battery_level:
+      hidden: true
+ sensor.battery_state:
+      hidden: true
+ sensor.bssid:
+      hidden: true
+ sensor.connection_type:
+      hidden: true
+ sensor.distance:
+      hidden: true
+ sensor.floors_ascended:
+      hidden: true
+ sensor.floors_descended:
+      hidden: true
+ sensor.sim_1:
+      hidden: true
+ sensor.lujo_iphone_battery_level:
+      hidden: true
+ sensor.lujo_iphone_battery_state:
+      hidden: true
+ sensor.ssid:
+      hidden: true
+ sensor.steps:
+      hidden: true
+ sensor.activity:
+      hidden: true
+ sensor.geocoded_location:
+      hidden: true
+ sensor.last_update_trigger:
+      hidden: true
+ person.luka:
+      hidden: true
+ person.sime:
+      hidden: true
+ device_tracker.simes_iphone:
+      hidden: true

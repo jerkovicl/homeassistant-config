@@ -87,7 +87,14 @@ logger:
     homeassistant.core: critical
     homeassistant.helpers.entity: critical
     homeassistant.components.http.ban: warning
-
+# Rss feeds
+feedreader:
+  urls:
+    - https://www.home-assistant.io/atom.xml
+    - http://feeds.feedburner.com/RecentCommitsToSmartirmaster
+  scan_interval:
+    minutes: 30
+  max_entries: 5
 # Text to speech
 tts:
   - platform: google_translate

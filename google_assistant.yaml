@@ -20,3 +20,9 @@ entity_config:
        expose: true
        name: Jukebox Volume
        room: Living room
+     climate.living_room_ac:
+       expose: true
+       name: AC
+       room: Living room
+       aliases:
+        - LIVING_ROOM_AC
