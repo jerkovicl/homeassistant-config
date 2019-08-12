@@ -95,6 +95,9 @@ feedreader:
   scan_interval:
     minutes: 30
   max_entries: 5
+# HACS
+hacs:
+  token: !secret github_token
 # Text to speech
 tts:
   - platform: google_translate
