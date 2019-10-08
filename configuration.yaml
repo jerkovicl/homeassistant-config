@@ -67,11 +67,11 @@ sensor:
     display_options:
       - 'date'
       - 'time'
-  - platform: yr
-    name: Weather 
-    monitored_conditions:
-      - temperature
-      - symbol
+  #- platform: yr
+  #  name: Weather 
+  #  monitored_conditions:
+  #    - temperature
+  #    - symbol
 ## Climate control custom component
 smartir:
 climate: !include climate.yaml
