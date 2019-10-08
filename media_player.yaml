@@ -1,0 +1,6 @@
+- platform: smartir
+  name: Cineplex
+  unique_id: living_room_mibox
+  device_code: 2000
+  controller_data: !secret broadlink_address
+  power_sensor: binary_sensor.tv_power
