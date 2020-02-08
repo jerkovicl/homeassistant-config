@@ -30,6 +30,10 @@
       hidden: true
  sensor.activity:
       hidden: true
+ sensor.date:
+      hidden: true
+ sensor.time:
+      hidden: true      
  sensor.geocoded_location:
       hidden: true
  sensor.last_update_trigger:

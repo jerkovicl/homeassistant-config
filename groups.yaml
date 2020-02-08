@@ -1,0 +1,10 @@
+#date_and_time:
+#    view: no
+#    icon: mdi:home 
+#    entities:
+#      - group.date_time
+#      - sensor.date_time
+date_time:
+    name: Date and Time
+    entities:
+      - sensor.date_time

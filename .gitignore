@@ -19,6 +19,7 @@ __pycache__
 life360.sh
 .ip_authenticated.yaml
 .config_entries.json
+hass-vm-093985e5e7a0.json
 *.google.token
 .google.token
 .ring_cache.pickle

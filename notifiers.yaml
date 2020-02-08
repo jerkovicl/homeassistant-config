@@ -1,0 +1,18 @@
+#  - name: pushbullet
+#    platform: pushbullet
+#    api_key: !secret pushbullet_api_key
+#  - platform: clicksend
+#    name: clicksend_sms
+#    username: !secret clicksend_username
+#    api_key: !secret clicksend_api_key
+#    recipient: !secret clicksend_recipient
+  - name: ios
+    platform: ios
+  - name: slack
+    platform: slack
+    api_key: !secret slack_token
+    default_channel: '#docker'
+    #icon: ':whale:'
+#  - name: telegram
+#    platform: telegram
+#    chat_id: !secret telegram_chat_id

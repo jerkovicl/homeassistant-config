@@ -35,8 +35,8 @@ zone:
   longitude: !secret longitude_home
   radius: 200
   icon: mdi:home
-
-
+# System Health integration data can be viewed in Developer Tools on the “Info”
+system_health: 
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 
@@ -45,11 +45,17 @@ http:
   base_url: !secret http_base_url
   #ssl_certificate: !secret http_ssl_certificate
   #ssl_key: !secret http_ssl_key
+  ip_ban_enabled: true
   login_attempts_threshold: 4
 
 
 # Discover some devices automatically
 discovery:
+frontend:
+  # Add themes
+  #themes: !include includes/themes.yaml
+  # Enable ES6 features
+  javascript_version: latest
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
 ios:
@@ -67,6 +73,7 @@ sensor:
     display_options:
       - 'date'
       - 'time'
+      - 'date_time'
   #- platform: yr
   #  name: Weather 
   #  monitored_conditions:
@@ -90,13 +97,13 @@ logger:
     homeassistant.helpers.entity: critical
     homeassistant.components.http.ban: warning
 # Rss feeds
-feedreader:
-  urls:
-    - https://www.home-assistant.io/atom.xml
-    - http://feeds.feedburner.com/RecentCommitsToSmartirmaster
-  scan_interval:
-    minutes: 30
-  max_entries: 5
+#feedreader:
+#  urls:
+#    - https://www.home-assistant.io/atom.xml
+#    - http://feeds.feedburner.com/RecentCommitsToSmartirmaster
+#  scan_interval:
+#    minutes: 30
+#  max_entries: 5
 # HACS
 hacs:
   token: !secret github_token
@@ -104,11 +111,13 @@ hacs:
 tts:
   - platform: google_translate
     service_name: google_say
+    language: 'en-us'
 # Notifications
-notify:
-  - platform: ios
+notify: !include notifiers.yaml
+#  - platform: ios
 # Exposed entities for Google Home control
 google_assistant: !include google_assistant.yaml
+#cast: !include cast.yaml
 # UI grouping
 group: !include groups.yaml
 # Automations
