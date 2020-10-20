@@ -1,0 +1,7 @@
+{
+  "deepcode.uploadApproved": true,
+  "files.associations": {
+    "*.yaml": "home-assistant"
+  },
+  "jshint.enable": "false"
+}
