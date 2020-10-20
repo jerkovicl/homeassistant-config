@@ -47,3 +47,4 @@ dlib_unknown_faces
 .cloud
 *.pickle
 .pc-session
+pythonenv3.8/*
