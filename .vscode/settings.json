@@ -3,5 +3,5 @@
   "files.associations": {
     "*.yaml": "home-assistant"
   },
-  "jshint.enable": "false"
+  "jshint.enable": false
 }
