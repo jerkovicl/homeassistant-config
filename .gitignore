@@ -1,6 +1,7 @@
 # Logs
 logs
 *.log
+
 # Python cache
 __pycache__
 *.pyc
@@ -10,7 +11,9 @@ __pycache__
 *.conf
 *.db
 *.db-journal
-*.log
+*.db-shm
+*.db-wal
+._*
 *.noload
 *.txt
 *.sqlite
@@ -22,13 +25,18 @@ life360.sh
 hass-vm-093985e5e7a0.json
 *.google.token
 .google.token
+.homekit.state
+.ios.conf
 .ring_cache.pickle
+.tradfri_psk.conf
 .spotify-token-cache
 .storage
+.cloud
 abodepy_cache.pickle
 camera_recording.py
 home-assistant.env
 home-assistant.*
+ip_bans.yaml
 known_devices.yaml
 entity_registry.yaml
 secrets.yaml
@@ -36,6 +44,8 @@ google_calendars.yaml
 components
 deps
 tts
+core
+html5_push_registrations.conf
 www/icons
 www/floorplans
 downloads
@@ -44,7 +54,27 @@ dlib_faces
 dlib_nofaces
 dlib_known_faces
 dlib_unknown_faces
-.cloud
+OZW_Log.txt
+pyozw.sqlite
+zwcfg_*
+zwscene.xml
 *.pickle
 .pc-session
 pythonenv3.8/*
+
+# ESPHome ignores
+esphome/secrets.yaml
+esphome/**/
+
+# Ignore add-on files
+aircast.xml
+airsonos.xml
+notebooks
+
+# Ignore files created by IDE's
+#.vscode
+.theia
+.Trash*
+
+# Specific keeps
+!.gitkeep
