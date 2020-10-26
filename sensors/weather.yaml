@@ -1,0 +1,7 @@
+---
+# Weather prediction
+- platform: time_date
+  display_options:
+    - "date"
+    - "time"
+    - "date_time"

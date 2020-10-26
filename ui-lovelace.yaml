@@ -1,0 +1,168 @@
+---
+title: Home
+#
+custom_header:
+  compact_mode: true
+  button_text:
+    options: ":"
+  background: var(--app-header-background-color)
+  elements_color: var(--app-header-text-color)
+  active_tab_color: var(--state-icon-active-color)
+  tab_indicator_color: var(--state-icon-active-color)
+#
+
+views:
+  - path: default_view
+    title: Home
+    icon: mdi:home
+    badges:
+      - entity: binary_sensor.updater
+      - entity: person.luka
+      - entity: person.sime
+      - entity: sensor.hacs
+      - entity: sun.sun
+    cards:
+      # PERSONS
+      - type: entities
+        title: Family
+        show_header_toggle: false
+        entities:
+          - device_tracker.lujo_iphone
+          - type: divider
+          - device_tracker.sime_iphone
+      # WEATHER
+      - type: custom:vertical-stack-in-card
+        title: WEATHER
+        cards:
+          # DATE TIME
+          - type: entities
+            entities:
+              - entity: sensor.date_time
+                # icon: 'mdi:emoticon-neutral-outline'
+                name: Today
+            # show_name: false
+            # title: Date and Time
+            show_header_toggle: false
+          - type: weather-forecast
+            entity: weather.home
+          # TEMP
+          - type: custom:mini-graph-card
+            name: TEMPERATURE
+            entities:
+              - sensor.mi_temperature_livingroom
+            line_color: orange
+            line_width: 5
+            font_size: 75
+            hour24: true
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                name: HUMIDITY
+                entities:
+                  - sensor.mi_humidity_livingroom
+                line_color: blue
+                line_width: 8
+                font_size: 75
+                hour24: true
+              - type: custom:mini-graph-card
+                name: BATTERY
+                entities:
+                  - sensor.mi_battery_livingroom
+                line_color: "#e74c3c"
+                line_width: 8
+                font_size: 75
+                hour24: true
+      # CORONA
+      - type: glance
+        title: Croatia
+        show_icon: true
+        show_name: true
+        show_state: true
+        entities:
+          - entity: sensor.croatia_confirmed
+            icon: "mdi:emoticon-neutral-outline"
+            name: Confirmed
+          - entity: sensor.croatia_current
+            icon: "mdi:emoticon-frown-outline"
+            name: Current
+          - entity: sensor.croatia_recovered
+            icon: "mdi:emoticon-happy-outline"
+            name: Recovered
+          - entity: sensor.croatia_deaths
+            icon: "mdi:emoticon-dead-outline"
+            name: Deaths
+      # LIGHTS
+      - type: entities
+        title: LIGHTS
+        entities:
+          - entity: light.kitchen_lights
+            # icon: mdi:light-switch
+      # UTILS
+      - type: entities
+        entities:
+          - sensor.snapshot_backup
+          # - sensor.plex_plexnuc
+      # MEDIA PLAYERS
+      - type: custom:vertical-stack-in-card
+        title: TV
+        cards:
+          - type: conditional
+            conditions:
+              - entity: media_player.cineplex
+                state_not: "unavailable"
+            card:
+              type: custom:mini-media-player
+              entity: media_player.cineplex
+              icon: mdi:television
+              artwork: cover
+              hide:
+                volume: false
+          - type: conditional
+            conditions:
+              - entity: media_player.living_room
+                state_not: "unavailable"
+            card:
+              type: custom:mini-media-player
+              entity: media_player.living_room
+              icon: mdi:television
+              artwork: cover
+              hide:
+                volume: false
+          - type: entities
+            entities:
+              - switch.panasonic_tv
+      #   - type: media-control
+      #     entity: media_player.living_room
+      - type: media-control
+        entity: media_player.flow
+      #   - type: media-control
+      #     entity: media_player.cineplex
+      - type: media-control
+        entity: media_player.googlehomemini
+      - type: media-control
+        entity: media_player.jukebox
+      - type: thermostat
+        # AC CONTROL
+        # convert to picture glance
+        entity: climate.living_room_ac
+      # - type: entities
+      #  entities:
+      #    - input_select.tv_source
+      #  title: Input select
+  - path: media
+    title: Utils
+    icon: mdi:cast-audio
+    cards:
+      - type: entities
+        entities:
+          - script.turn_jukebox_volume_up
+      - type: custom:spotify-card
+        client_id: !secret sp_client_id
+        limit: 10 # <optional number of playlists to retrieve (default 10)>
+        # device: <optional name of a device to pre-select>
+        player: Jukebox
+        # featuredPlaylists: <optional show featured playlists instead of users playlists>
+        # featuredPlaylistsCountryCode: <optional country code to show featured playlist relevent to a particular country. https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 >
+        dailyMixes: false # <optional show daily mixes, requires spotcast>
+        # height: <optional pixels height for the playlist element. If content is larger scrolling will be enabled>
+        # random_song: <optional boolean to start playlists from a random song>

@@ -1,0 +1,7 @@
+---
+# docs https://www.home-assistant.io/integrations/light.group/
+platform: group
+name: Kitchen Lights
+entities:
+  - light.kitchen_light_1
+  - light.0x588e81fffe4e11ca_light
