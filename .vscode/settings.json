@@ -1,7 +1,8 @@
 {
-  "deepcode.uploadApproved": true,
-  "files.associations": {
-    "*.yaml": "home-assistant"
-  },
-  "jshint.enable": false
+	"deepcode.uploadApproved": true,
+	"files.associations": {
+		"*.yaml": "home-assistant"
+	},
+	"prettier.endOfLine": "lf",
+	"jshint.enable": false
 }
