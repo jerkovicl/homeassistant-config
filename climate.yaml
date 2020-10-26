@@ -4,6 +4,6 @@
   unique_id: living_room_ac
   device_code: 1400
   controller_data: !secret broadlink_address
-  temperature_sensor: sensor.mi_temperature_livingroom # sensor.weather_temperature
+  temperature_sensor: sensor.mi_temperature_livingroom
   humidity_sensor: sensor.mi_humidity_livingroom
   # power_sensor: binary_sensor.ac_power

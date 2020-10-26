@@ -13,7 +13,7 @@
   platform: slack
   api_key: !secret slack_token
   default_channel: "#docker"
-  #icon: ':whale:'
+  # icon: ':whale:'
 #  - name: telegram
 #    platform: telegram
 #    chat_id: !secret telegram_chat_id
