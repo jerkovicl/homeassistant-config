@@ -3,8 +3,8 @@ tv_source:
   name: TV Source
   options:
     - "Select"
-    - "HDMI 1" #  (Mi Box)
-    - "HDMI 2" #  (PS4)
-    - "HDMI 4" #  (Cast)
+    - "HDMI 1" # (Mi Box)
+    - "HDMI 2" # (PS4)
+    - "HDMI 4" # (Cast)
   initial: "Select"
   icon: mdi:monitor
