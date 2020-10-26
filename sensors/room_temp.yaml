@@ -6,23 +6,17 @@
   # period: 60
   # log_spikes: False
   # use_median: False
-  active_scan: False
-  extended_scan: True
+  active_scan: false
+  extended_scan: true
   hci_interface: 0
-  batt_entities: True
+  batt_entities: true
   # encryptors:
   #  'A4:C1:38:7F:00:93': '4c6e1cd9e833be6edc77898347c818a6'
-  report_unknown: False
+  report_unknown: false
   sensor_names:
     "A4:C1:38:7F:00:93": "Livingroom"
   whitelist:
     - "A4:C1:38:7F:00:93"
-  # mac: !secret bt_temp_monitor_mac
-  # name: Living Room Sensor
-  # monitored_conditions:
-  #  - temperature
-  #  - humidity
-  #  - battery
 # - platform: yr
 #  name: Weather
 #  monitored_conditions:
