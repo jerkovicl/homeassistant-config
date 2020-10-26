@@ -145,11 +145,6 @@ views:
         # AC CONTROL
         # convert to picture glance
         entity: climate.living_room_ac
-
-      # - type: entities
-      #   entities:
-      #    - input_select.tv_source
-      #  title: Input select
   - path: media
     title: Utils
     icon: mdi:cast-audio
