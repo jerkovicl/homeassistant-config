@@ -1,6 +1,17 @@
-  - platform: nmap_tracker
-    hosts: 192.168.5.0/24
-    interval_seconds: 30
-    new_device_defaults:
-      track_new_devices: false
-      hide_if_away: false
+---
+- platform: nmap_tracker
+  hosts:
+    - 192.168.5.0/24
+    - 192.168.5.18
+    - 192.168.5.28
+  exclude:
+    - 192.168.5.91
+    - 192.168.1.13
+  interval_seconds: 90
+  new_device_defaults:
+    track_new_devices: false
+    # hide_if_away: false
+- platform: ping
+  hosts:
+    lujo_iphone: 192.168.5.18
+    sime_iphone: 192.168.5.28

@@ -1,51 +1,52 @@
+---
 #########################################################
 #                                                       #
 #            LIVING ROOM LAMPS ON WHEN AWAY             #
 #                                                       #
 #########################################################
 
-  - alias: "Living Room Lamps On When leaving"
-    initial_state: true
-    trigger:
-      - platform: state
-        entity_id: device_tracker.lujo_iphone
-      - platform: state
-        entity_id: device_tracker.sime_iphone
-    condition:
-      condition: and
-      conditions:
-        - condition: template
-          value_template: "{{ states('device_tracker.lujo_iphone') != 'home' }}"
-        - condition: template
-          value_template: "{{ states('device_tracker.sime_iphone') != 'home' }}"
-        - condition: or
-          conditions:
-            - condition: state
-              entity_id: switch.basic1
-              state: 'on'
-            - condition: state
-              entity_id: light.yeelightrgb2
-              state: 'on'
-    action:
-      - service: notify.ios_lujo_iphone
+- alias: "Living Room Lamps On When leaving"
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: device_tracker.lujo_iphone
+    - platform: state
+      entity_id: device_tracker.sime_iphone
+  condition:
+    condition: and
+    conditions:
+      - condition: template
+        value_template: "{{ states('device_tracker.lujo_iphone') != 'home' }}"
+      - condition: template
+        value_template: "{{ states('device_tracker.sime_iphone') != 'home' }}"
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: switch.basic1
+            state: "on"
+          - condition: state
+            entity_id: light.yeelightrgb2
+            state: "on"
+  action:
+    - service: notify.ios_lujo_iphone
+      data:
+        message: "The Living Room Lamps are on and you are away"
         data:
-          message: "The Living Room Lamps are on and you are away"
-          data:
-            push:
-              badge: 0
-              category: 'lamps'
+          push:
+            badge: 0
+            category: "lamps"
 
-  - alias: Lamps on when away notification
-    trigger:
-      platform: event
-      event_type: ios.notification_action_fired
-      event_data:
-        actionName: LAMPS_OFF
-    action:
-      - service: switch.turn_off
-        entity_id: switch.basic1
-      - service: light.turn_off
-        entity_id: light.yeelightrgb2
+- alias: Lamps on when away notification
+  trigger:
+    platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: LAMPS_OFF
+  action:
+    - service: switch.turn_off
+      entity_id: switch.basic1
+    - service: light.turn_off
+      entity_id: light.yeelightrgb2
 
 #########################################################
 #                                                       #
@@ -53,57 +54,56 @@
 #                                                       #
 #########################################################
 
-  - alias: "Media Center On When leaving"
-    initial_state: true
-    trigger:
-      - platform: state
-        entity_id: group.adam_home_presence
-      - platform: state
-        entity_id: group.amy_home_presence
-    condition:
-      condition: and
-      conditions:
-        - condition: template
-          value_template: "{{ states('group.adam_home_presence') != 'home' }}"
-        - condition: template
-          value_template: "{{ states('group.amy_home_presence') != 'home' }}"
-        - condition: or
-          conditions:
-            - condition: template
-              value_template: "{{ states('sensor.pow1_power') | float > 10 }}"
-            - condition: template
-              value_template: "{{ states('sensor.pow2_power') | float > 10 }}"
-    action:
-      - service: notify.ios_adams_iphone
-        data_template:
-          message: 'The TV is pulling {{ states("sensor.pow2_power") }} watts, the Receiver is pulling {{ states("sensor.pow1_power") }} watts and no one is home'
-          data:
-            push:
-              badge: 0
-              category: 'mediacenter'
+- alias: "Media Center On When leaving"
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: group.adam_home_presence
+    - platform: state
+      entity_id: group.amy_home_presence
+  condition:
+    condition: and
+    conditions:
+      - condition: template
+        value_template: "{{ states('group.adam_home_presence') != 'home' }}"
+      - condition: template
+        value_template: "{{ states('group.amy_home_presence') != 'home' }}"
+      - condition: or
+        conditions:
+          - condition: template
+            value_template: "{{ states('sensor.pow1_power') | float > 10 }}"
+          - condition: template
+            value_template: "{{ states('sensor.pow2_power') | float > 10 }}"
+  action:
+    - service: notify.ios_adams_iphone
+      data_template:
+        message: 'The TV is pulling {{ states("sensor.pow2_power") }} watts, the Receiver is pulling {{ states("sensor.pow1_power") }} watts and no one is home'
+        data:
+          push:
+            badge: 0
+            category: "mediacenter"
 
-  - alias: TV on when away notification
-    initial_state: true
-    trigger:
-      platform: event
-      event_type: ios.notification_action_fired
-      event_data:
-        actionName: TV_OFF
-    action:
-      - service: switch.turn_off
-        entity_id: switch.tvpower
+- alias: TV on when away notification
+  initial_state: true
+  trigger:
+    platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: TV_OFF
+  action:
+    - service: switch.turn_off
+      entity_id: switch.tvpower
 
-  - alias: Receiver on when away notification
-    initial_state: true
-    trigger:
-      platform: event
-      event_type: ios.notification_action_fired
-      event_data:
-        actionName: RECEIVER_OFF
-    action:
-      - service: switch.turn_off
-        entity_id: switch.receiverpower
-
+- alias: Receiver on when away notification
+  initial_state: true
+  trigger:
+    platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: RECEIVER_OFF
+  action:
+    - service: switch.turn_off
+      entity_id: switch.receiverpower
 ####################################################
 #                                                  #
 #           END OF CONFIGURATION FILE              #

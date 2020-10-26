@@ -1,4 +1,5 @@
-#https://home-assistant.io/docs/ecosystem/ios/
+---
+# https://companion.home-assistant.io/docs/notifications/actionable-notifications
 
 ####################################################
 #                                                  #
@@ -6,46 +7,45 @@
 #                                                  #
 ####################################################
 
-  push:
-    categories:
-      - name: Lamps Off
-        identifier: 'Lamps'
-        actions:
-          - identifier: 'LAMPS_OFF'
-            title: 'Lamps Off'
-            activationMode: 'background'
-            authenticationRequired: yes
-            destructive: yes
-            behavior: 'default'
-          - identifier: 'DISMISS'
-            title: 'Dismiss'
-            activationMode: 'background'
-            authenticationRequired: yes
-            destructive: no
-            behavior: 'default'
-            
-      - name: Media Center
-        identifier: 'Mediacenter'
-        actions:
-          - identifier: 'TV_OFF'
-            title: 'TV Off'
-            activationMode: 'background'
-            authenticationRequired: yes
-            destructive: yes
-            behavior: 'default'
-          - identifier: 'RECEIVER_OFF'
-            title: 'Receiver Off'
-            activationMode: 'background'
-            authenticationRequired: yes
-            destructive: yes
-            behavior: 'default'
-          - identifier: 'DISMISS'
-            title: 'Dismiss'
-            activationMode: 'background'
-            authenticationRequired: yes
-            destructive: no
-            behavior: 'default'            
+push:
+  categories:
+    - name: Lamps Off
+      identifier: "Lamps"
+      actions:
+        - identifier: "LAMPS_OFF"
+          title: "Lamps Off"
+          activationMode: "background"
+          authenticationRequired: true
+          destructive: true
+          behavior: "default"
+        - identifier: "DISMISS"
+          title: "Dismiss"
+          activationMode: "background"
+          authenticationRequired: true
+          destructive: false
+          behavior: "default"
 
+    - name: Media Center
+      identifier: "Mediacenter"
+      actions:
+        - identifier: "TV_OFF"
+          title: "TV Off"
+          activationMode: "background"
+          authenticationRequired: true
+          destructive: true
+          behavior: "default"
+        - identifier: "RECEIVER_OFF"
+          title: "Receiver Off"
+          activationMode: "background"
+          authenticationRequired: true
+          destructive: true
+          behavior: "default"
+        - identifier: "DISMISS"
+          title: "Dismiss"
+          activationMode: "background"
+          authenticationRequired: true
+          destructive: false
+          behavior: "default"
 ####################################################
 #                                                  #
 #            END OF CONFIGUATION FILE              #

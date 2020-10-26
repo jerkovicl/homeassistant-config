@@ -1,3 +1,4 @@
+---
 #########################################################
 #                                                       #
 #                 LEAVING HOME                          #
@@ -22,15 +23,14 @@
   action:
     - service: switch.turn_off
       entity_id:
-        #- switch.kuled1
-        #- switch.kuled2
-        #- switch.basic1
+        # - switch.kuled1
+        # - switch.kuled2
+        # - switch.basic1
     - service: light.turn_off
       entity_id:
-        #- light.tradfri_bulb_e26_ws_opal_980lm_3
-        #- light.tradfri_bulb_e26_ws_opal_980lm_2_2
-        #- light.yeelightrgb2
-
+        # - light.tradfri_bulb_e26_ws_opal_980lm_3
+        # - light.tradfri_bulb_e26_ws_opal_980lm_2_2
+        # - light.yeelightrgb2
 ########################################################
 #                                                      #
 #             END OF CONFIGURATION FILE                #

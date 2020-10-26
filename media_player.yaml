@@ -1,3 +1,4 @@
+---
 - platform: smartir
   name: Cineplex
   unique_id: living_room_mibox

@@ -1,10 +1,16 @@
-#date_and_time:
+---
+# date_and_time:
 #    view: no
-#    icon: mdi:home 
+#    icon: mdi:home
 #    entities:
 #      - group.date_time
 #      - sensor.date_time
 date_time:
-    name: Date and Time
-    entities:
-      - sensor.date_time
+  # name: Date and Time
+  entities:
+    - sensor.date_time
+# lights_kitchen:
+#     name: kitchen
+#     entities:
+#       - light.0x842e14fffe404845_light
+#       - light.kitchen_cupboard

@@ -1,10 +1,12 @@
+---
 homeassistant:
+  external_url: !secret base_url
+  internal_url: http://192.168.5.19:8123
   auth_providers:
     - type: homeassistant
     - type: trusted_networks
       trusted_networks:
         - 127.0.0.1
-        - ::1
         - 192.168.5.0/24
     #- type: legacy_api_password
     #  api_password: !secret http_password
@@ -21,7 +23,7 @@ homeassistant:
   temperature_unit: C
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/Zagreb
-# Customization file
+  # Customization file
   customize: !include customize.yaml
 # Weather DarkSky setup
 #   weather:
@@ -36,68 +38,115 @@ zone:
   radius: 200
   icon: mdi:home
 # System Health integration data can be viewed in Developer Tools on the “Info”
-system_health: 
+system_health:
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 
 # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
 http:
-  base_url: !secret http_base_url
-  #ssl_certificate: !secret http_ssl_certificate
-  #ssl_key: !secret http_ssl_key
+  # base_url: !secret http_base_url
+  # ssl_certificate: !secret http_ssl_certificate
+  # ssl_key: !secret http_ssl_key
   ip_ban_enabled: true
   login_attempts_threshold: 4
 
-
 # Discover some devices automatically
 discovery:
+#   ignore:
+#     - igd
+lovelace:
+  mode: yaml
+  resources:
+    - url: /hacsfiles/custom-header/custom-header.js
+      type: module
+    - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
+      type: module
+    - url: /hacsfiles/vertical-stack-in-card/vertical-stack-in-card.js
+      type: module
+    - url: /hacsfiles/lovelace-gui-sandbox/gui-sandbox.js
+      type: module
+    - url: /hacsfiles/spotify-card/spotify-card.js
+      type: module
+    - url: /hacsfiles/decluttering-card/decluttering-card.js
+      type: module
+    - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
+      type: module
 frontend:
   # Add themes
-  #themes: !include includes/themes.yaml
+  themes: !include_dir_merge_named themes
   # Enable ES6 features
-  javascript_version: latest
+  # javascript_version: latest
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
-ios:
+# ########################################
+# ###             MOBILE               ###
+# ########################################
+ios: !include notify/ios_config.yaml
+mobile_app:
 person:
 #   - name: Luka
 #     id: djlujo
 #     user_id: !secret user_id
 #     device_trackers:
 #       - device_tracker.lujo_iphone
-      
+
 # Sensors
-sensor:
-  # Weather prediction
-  - platform: time_date
-    display_options:
-      - 'date'
-      - 'time'
-      - 'date_time'
-  #- platform: yr
-  #  name: Weather 
-  #  monitored_conditions:
-  #    - temperature
-  #    - symbol
+sensor: !include_dir_merge_list sensors
 ## Climate control custom component
 smartir:
 climate: !include climate.yaml
 ## Media player control custom component
 media_player: !include media_player.yaml
+# SPOTIFY CONFIG
+spotify:
+  client_id: !secret sp_client_id
+  client_secret: !secret sp_client_secret
+# SPOTCAST CONFIG
+spotcast:
+  sp_dc: !secret sp_dc
+  sp_key: !secret sp_key
+# plex_assistant: !include plex_assistant.yaml
+# plex: !include plex.yaml
 # Enables configuration UI
 config:
+# ########################################
+# ###              LOGGING             ###
+# ########################################
+recorder:
+  # purge_interval: 1
+  purge_keep_days: 3
+  exclude:
+    domains:
+      - sun
+    entities:
+      - sensor.date
+      - sensor.date_time
+      - sensor.time
+history:
+  exclude:
+    domains:
+      - sun
+    entities:
+      - sensor.date
+      - sensor.date_time
+      - sensor.time
 # View all events in a logbook
 logbook:
+  exclude:
+    domains:
+      - sun
 # Log Severities: notset, debug, info, warn, warning, error, fatal, critical
 logger:
   default: error
   logs:
+    homeassistant.components.websocket_api: fatal
     homeassistant.components.media_player: critical
     homeassistant.core: critical
     homeassistant.helpers.entity: critical
     homeassistant.components.http.ban: warning
+    custom_components.mitemp_bt: warning
 # Rss feeds
-#feedreader:
+# feedreader:
 #  urls:
 #    - https://www.home-assistant.io/atom.xml
 #    - http://feeds.feedburner.com/RecentCommitsToSmartirmaster
@@ -111,7 +160,7 @@ hacs:
 tts:
   - platform: google_translate
     service_name: google_say
-    language: 'en-us'
+    language: "en-us"
 # Notifications
 notify: !include notifiers.yaml
 #  - platform: ios
@@ -128,4 +177,5 @@ device_tracker: !include device_tracker.yaml
 script: !include scripts.yaml
 # UI Components
 switch: !include_dir_merge_list switch
+light: !include_dir_list lights
 input_select: !include input_select.yaml

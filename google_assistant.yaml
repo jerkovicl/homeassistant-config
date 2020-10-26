@@ -1,3 +1,4 @@
+---
 project_id: hass-vm
 # api_key: !secret google_api_key
 service_account: !include hass-vm-093985e5e7a0.json
@@ -11,20 +12,24 @@ expose_by_default: false
 #     - group
 #     - script
 entity_config:
-     switch.panasonic_tv:
-       expose: true
-       name: TV
-       room: Living room
-       aliases:
-        - PANASONIC_TV
-        - LIVING_ROOM_TV
-     script.jukebox_volume_up:
-       expose: true
-       name: Jukebox Volume
-       room: Living room
-     climate.living_room_ac:
-       expose: true
-       name: AC
-       room: Living room
-       aliases:
-        - LIVING_ROOM_AC
+  switch.panasonic_tv:
+    expose: true
+    name: TV
+    room: Living room
+    aliases:
+      - PANASONIC_TV
+      - LIVING_ROOM_TV
+  script.jukebox_volume_up:
+    expose: true
+    name: Jukebox Volume
+    room: Living room
+  climate.living_room_ac:
+    expose: true
+    name: AC
+    room: Living room
+    aliases:
+      - LIVING_ROOM_AC
+  light.0x842e14fffe404845_light:
+    expose: true
+    name: Kitchen Light
+    room: Kitchen

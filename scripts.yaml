@@ -1,11 +1,12 @@
+---
 turn_jukebox_volume_up:
   alias: Jukebox Volume Up
   sequence:
-  - service: tts.google_say
-    entity_id: media_player.living_room_speaker
-    data:
-      message: 'Setting volume for Jukebox'
-  - service: media_player.volume_set
-    data:
-      entity_id: media_player.flow
-      volume_level: '0.4'
+    - service: tts.google_say
+      entity_id: media_player.living_room_speaker
+      data:
+        message: "Setting volume for Jukebox"
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.flow
+        volume_level: "0.4"
