@@ -35,7 +35,7 @@ jobs:
       - name: Getting your configuration from GitHub
         uses: actions/checkout@v1
       - name: Copy files into configuration folder
-        run: cp -R ./*
+        run: cp -R ./* ./config
       - name: Home Assistant Version
         uses: "docker://homeassistant/home-assistant:stable"
         with:
@@ -46,6 +46,6 @@ jobs:
         with:
           args: |
             python -m homeassistant \
-              --config ./ \
-              --script check_config \
-              --info all
+            --config ./config/ \
+            --script check_config \
+            --info all
