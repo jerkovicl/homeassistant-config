@@ -34,10 +34,8 @@ jobs:
     steps:
       - name: Getting your configuration from GitHub
         uses: actions/checkout@v1
-      - name: Create configuration folder
-        run: mkdir ./config
-      - name: Copy files into configuration folder
-        run: cp -R ./* ./config
+      # - name: Copy files into configuration folder
+      #  run: cp -R ./* ./config
       - name: Home Assistant Version
         uses: "docker://homeassistant/home-assistant:stable"
         with:
