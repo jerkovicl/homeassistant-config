@@ -5,8 +5,8 @@ name: Home Assistant CI
 on:
   push:
   pull_request:
-  schedule:
-    - cron: 0 12 * * *
+  # schedule:
+  #  - cron: 0 12 * * *
 
 jobs:
   yamllint:
